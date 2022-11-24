@@ -1,7 +1,15 @@
-.loginType{
-    height: 5rem;
-    width: 5rem;
-    color: white;
-    font-size: x-large;
-    background-color: var( --link-light-color);
+.home {
+  display: flex;
+  column-gap: 3rem;
+}
+
+.loginType {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  width: 15rem;
+  color: white;
+  font-size: x-large;
+  background-color: var(--link-dark-color);
 }

@@ -12,3 +12,6 @@
   --text-style: "Ubuntu", sans-serif;
 }
 
+body {
+  width: 100vw;
+}
