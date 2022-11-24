@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  --sidebar-background-color: #1b2530;
+  --background-color: black;
+  --secondary-background-color: rgb(22, 27, 31);
+  --primary-text-color: white;
+  --secondary-text-color: rgb(113, 118, 123);
+  --link-dark-color: #1f80e0;
+  --link-light-color: #3bb2f6;
+  --text-style: "Ubuntu", sans-serif;
+}
+

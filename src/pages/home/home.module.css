@@ -1,0 +1,7 @@
+.loginType{
+    height: 5rem;
+    width: 5rem;
+    color: white;
+    font-size: x-large;
+    background-color: var( --link-light-color);
+}
