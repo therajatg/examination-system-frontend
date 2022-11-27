@@ -1,14 +1,28 @@
 import style from "./home.module.css";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await axios.get("students/");
+  //     console.log(response);
+  //   })();
+  // }, []);
   return (
     <main className={style.home}>
-      <a href="http://127.0.0.1:8000/admin/" className={style.loginType}>
-        Admin Login
-      </a>
-      <div className={style.loginType}>Staff Login</div>
-      <div className={style.loginType}>Student Login</div>
+      <h1>Welcome To Online Examination Portal</h1>
+      <div className={style.users}>
+        <Link to="/studentLogin" className={style.loginType}>
+          Student Login
+        </Link>
+        <Link to="/staffLogin" className={style.loginType}>
+          Staff Login
+        </Link>
+      </div>
     </main>
   );
 };
