@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { studentAuthReducer } from "./features/index";
+import { studentAuthReducer, staffAuthReducer } from "./features/index";
 
 export const store = configureStore({
-  reducer: { studentAuth: studentAuthReducer },
+  reducer: { studentAuth: studentAuthReducer, staffAuth: staffAuthReducer },
 });

@@ -8,10 +8,10 @@ import axios from "axios";
 
 export function StudentSignup() {
   const [userDetail, setUserDetail] = useState({
-    name: null,
-    email: null,
-    password: null,
-    isActive: false,
+    name: "",
+    email: "",
+    password: "",
+    isActive: true,
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ export function StudentSignup() {
         <div>
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             value={userDetail.email}
@@ -71,7 +71,7 @@ export function StudentSignup() {
         </div>
         <p className={style.signupLine}>
           Already a user?{" "}
-          <Link to="/login" className={style.signup}>
+          <Link to="/studentLogin" className={style.signup}>
             Login
           </Link>{" "}
         </p>

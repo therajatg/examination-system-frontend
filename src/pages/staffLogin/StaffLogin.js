@@ -2,7 +2,7 @@ import style from "./staffLogin.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { studentLogin } from "../../features/index";
+import { staffLogin } from "../../features/index";
 import { toast } from "react-toastify";
 
 export function StaffLogin() {
@@ -13,18 +13,7 @@ export function StaffLogin() {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    dispatch(studentLogin(userDetail));
-    // .then((response) => {
-    //   if (response?.payload?.encodedToken) {
-    //     navigate("/page/home");
-    //   } else if (
-    //     response.error.message === "Request failed with status code 401"
-    //   ) {
-    //     toast.error("Please enter correct credentials");
-    //   } else {
-    //     toast.error(`${response.error.message}. Please try again.`);
-    //   }
-    // });
+    dispatch(staffLogin(userDetail));
   };
 
   return (
@@ -34,7 +23,7 @@ export function StaffLogin() {
         <div>
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             value={userDetail.email}

@@ -4,15 +4,15 @@ import axios from "axios";
 
 const initialState = {
   status: "idle",
-  userDetail: null,
+  studentDetail: null,
   error: null,
 };
 
 const studentSignup = createAsyncThunk(
   "studentAuth/signup",
-  async (userDetail) => {
+  async (studentDetail) => {
     try {
-      const response = await axios.post("student/", userDetail);
+      const response = await axios.post("student/", studentDetail);
       return response.data;
     } catch (err) {
       return err;
@@ -22,11 +22,14 @@ const studentSignup = createAsyncThunk(
 
 const studentLogin = createAsyncThunk(
   "studentAuth/login",
-  async (userDetail) => {
+  async (studentDetail) => {
     const response = await axios.get("student/");
     const data = response.data;
     for (let i of data) {
-      if (i.email === userDetail.email && i.password === userDetail.password) {
+      if (
+        i.email === studentDetail.email &&
+        i.password === studentDetail.password
+      ) {
         return i;
       }
     }
@@ -55,7 +58,7 @@ const studentAuthSlice = createSlice({
     },
     [studentSignup.fulfilled]: (state, action) => {
       state.status = "success";
-      state.userDetail = action.payload;
+      state.studentDetail = action.payload;
       toast.success("Signup Successful");
     },
     [studentSignup.rejected]: (state, action) => {
@@ -68,7 +71,7 @@ const studentAuthSlice = createSlice({
     },
     [studentLogin.fulfilled]: (state, action) => {
       state.status = "success";
-      state.userDetail = action.payload;
+      state.studentDetail = action.payload;
       console.log(action.payload);
       toast.success("Welcome To Student Portal");
     },
@@ -83,5 +86,4 @@ const studentAuthSlice = createSlice({
 
 export const studentAuthReducer = studentAuthSlice.reducer;
 // export const { logout, updateUser } = authSlice.actions;
-
 export { studentLogin, studentSignup };

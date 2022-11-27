@@ -23,7 +23,7 @@ export function StudentLogin() {
         <div>
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             value={userDetail.email}
