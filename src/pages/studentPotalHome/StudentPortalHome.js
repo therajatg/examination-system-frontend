@@ -20,7 +20,8 @@ export const StudentPortalHome = () => {
           <ExamCard
             examName={exam?.examName}
             examScore={exam?.score}
-            key={exam?.name}
+            examId={exam?.examId}
+            key={exam?.examName}
           />
         ))}
       </div>

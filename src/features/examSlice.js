@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   status: "idle",
   allExamsWithScores: [],
+  examPaper: [],
   error: null,
 };
 
@@ -29,37 +30,48 @@ const getAllExamsWithScores = createAsyncThunk(
         );
         if (scoreInAParticularExam) {
           result.push({
+            examId: exam.exam_id,
             examName: exam.name,
             score: scoreInAParticularExam.score,
           });
         } else {
-          result.push({ examName: exam.name, score: null });
+          result.push({
+            examId: exam.exam_id,
+            examName: exam.name,
+            score: null,
+          });
         }
       }
-      console.log(result);
       return result;
     } catch (err) {
-      console.log(577);
       return err;
     }
   }
 );
 
-const getAllScores = createAsyncThunk("exam/getAllScores", async () => {
-  try {
-    const response = await axios.get("score/");
-    return response.data;
-  } catch (err) {
-    return err;
+const getQuestions = createAsyncThunk(
+  "exam/getQuestions",
+  async ({ examId }) => {
+    try {
+      const response = await axios.get("question/");
+      // console.log(response.data);
+      // console.log(response.data.filter((question) => question.exam == examId));
+      // console.log(examId);
+      return response.data.filter((question) => question.exam == examId);
+    } catch (err) {
+      return err;
+    }
   }
-});
+);
 
 const postScore = createAsyncThunk("exam/postScore", async (scoreDetail) => {
   try {
+    console.log(scoreDetail);
     const response = await axios.post("score/", scoreDetail);
-    return response.data;
+    // return response.data;
   } catch (err) {
-    return err;
+    console.log(scoreDetail);
+    // return err;
   }
 });
 
@@ -88,25 +100,26 @@ const examSlice = createSlice({
       // state.error = action.payload.error;
       // toast.error(`${state.error.message}. Please try again later.`);
     },
-    //     [staffLogin.pending]: (state) => {
-    //       state.status = "loading";
-    //     },
-    //     [staffLogin.fulfilled]: (state, action) => {
-    //       state.status = "success";
-    //       state.staffDetail = action.payload;
-    //       console.log(action.payload);
-    //       toast.success("Welcome To staff Portal");
-    //     },
-    //     [staffLogin.rejected]: (state, action) => {
-    //       state.status = "failure";
-    //       state.error = action.error;
-    //       console.log("Enter the correct credentials");
-    //       toast.error("Enter the correct credentials");
-    //     },
+    [getQuestions.pending]: (state) => {
+      state.status = "loading";
+    },
+    [getQuestions.fulfilled]: (state, action) => {
+      state.status = "success";
+      state.examPaper = action.payload;
+      // state. = action.payload;
+      // console.log(action.payload);
+      // toast.success("Welcome To staff Portal");
+    },
+    [getQuestions.rejected]: (state, action) => {
+      state.status = "failure";
+      // state.error = action.error;
+      // console.log("Enter the correct credentials");
+      // toast.error("Enter the correct credentials");
+    },
   },
 });
 
 export const examReducer = examSlice.reducer;
 // export const { staffLogout } = staffAuthSlice.actions;
 
-export { getAllExamsWithScores };
+export { getAllExamsWithScores, getQuestions, postScore };

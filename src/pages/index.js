@@ -5,3 +5,4 @@ export { StaffSignup } from "./staffSignup/StaffSignup";
 export { StudentSignup } from "./studentSignup/StudentSignup";
 export { StudentPortalHome } from "./studentPotalHome/StudentPortalHome";
 export { StaffPortalHome } from "./staffPortalHome/StaffPortalHome";
+export { ExamPaper } from "./examPaper/ExamPaper";

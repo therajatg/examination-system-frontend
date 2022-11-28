@@ -12,4 +12,9 @@ export {
   staffLogout,
 } from "./staffAuthSlice";
 
-export { examReducer, getAllExamsWithScores } from "./examSlice";
+export {
+  examReducer,
+  getAllExamsWithScores,
+  getQuestions,
+  postScore,
+} from "./examSlice";
