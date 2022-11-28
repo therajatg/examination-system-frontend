@@ -2,8 +2,6 @@
 
 :root {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   --nav-color: #1b2530;
   --background-color: #0f171e;
   --nav-search-color: #121926;
@@ -24,6 +22,8 @@
 
 body {
   width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -41,4 +41,8 @@ button:hover {
 
 a {
   text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
 }

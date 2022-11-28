@@ -15,11 +15,14 @@ export function StudentSignup() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((store) => store?.auth?.token);
+  const { studentDetail } = useSelector((store) => store.studentAuth);
 
   const signupHandler = (e) => {
     e.preventDefault();
     dispatch(studentSignup(userDetail));
+    if (studentDetail) {
+      navigate("/studentPortalHome");
+    }
   };
 
   return (

@@ -40,18 +40,13 @@ const studentLogin = createAsyncThunk(
 const studentAuthSlice = createSlice({
   name: "studentAuth",
   initialState,
-  // reducers: {
-  //   logout: (state) => {
-  //     state.token = null;
-  //     state.user = null;
-  //     localStorage.removeItem("token");
-  //     localStorage.removeItem("user");
-  //   },
-  //   updateUser: (state, action) => {
-  //     state.user = action.payload;
-  //     localStorage.setItem("user", JSON.stringify(action.payload));
-  //   },
-  // },
+  reducers: {
+    studentLogout: (state) => {
+      state.status = "idle";
+      state.studentDetail = null;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [studentSignup.pending]: (state) => {
       state.status = "loading";
@@ -59,6 +54,7 @@ const studentAuthSlice = createSlice({
     [studentSignup.fulfilled]: (state, action) => {
       state.status = "success";
       state.studentDetail = action.payload;
+      localStorage.setItem("studentDetail", JSON.stringify(action.payload));
       toast.success("Signup Successful");
     },
     [studentSignup.rejected]: (state, action) => {
@@ -72,6 +68,7 @@ const studentAuthSlice = createSlice({
     [studentLogin.fulfilled]: (state, action) => {
       state.status = "success";
       state.studentDetail = action.payload;
+      localStorage.setItem("studentDetail", JSON.stringify(action.payload));
       console.log(action.payload);
       toast.success("Welcome To Student Portal");
     },
@@ -85,5 +82,5 @@ const studentAuthSlice = createSlice({
 });
 
 export const studentAuthReducer = studentAuthSlice.reducer;
-// export const { logout, updateUser } = authSlice.actions;
+export const { studentLogout } = studentAuthSlice.actions;
 export { studentLogin, studentSignup };

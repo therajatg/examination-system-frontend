@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 export function StudentLogin() {
   const [userDetail, setUserDetail] = useState({ email: null, password: null });
+  const { studentDetail } = useSelector((store) => store.studentAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((store) => store?.auth?.token);
@@ -14,6 +15,9 @@ export function StudentLogin() {
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(studentLogin(userDetail));
+    if (studentDetail) {
+      navigate("/studentPortalHome");
+    }
   };
 
   return (

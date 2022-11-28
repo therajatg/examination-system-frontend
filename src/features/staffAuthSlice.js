@@ -35,18 +35,13 @@ const staffLogin = createAsyncThunk("staffAuth/login", async (staffDetail) => {
 const staffAuthSlice = createSlice({
   name: "staffAuth",
   initialState,
-  // reducers: {
-  //   logout: (state) => {
-  //     state.token = null;
-  //     state.user = null;
-  //     localStorage.removeItem("token");
-  //     localStorage.removeItem("user");
-  //   },
-  //   updateUser: (state, action) => {
-  //     state.user = action.payload;
-  //     localStorage.setItem("user", JSON.stringify(action.payload));
-  //   },
-  // },
+  reducers: {
+    staffLogout: (state) => {
+      state.status = "idle";
+      state.staffDetail = null;
+      state.error = null;
+    },
+  },
   extraReducers: {
     [staffSignup.pending]: (state) => {
       state.status = "loading";
@@ -80,6 +75,6 @@ const staffAuthSlice = createSlice({
 });
 
 export const staffAuthReducer = staffAuthSlice.reducer;
-// export const { logout, updateUser } = authSlice.actions;
+export const { staffLogout } = staffAuthSlice.actions;
 
 export { staffLogin, staffSignup };
