@@ -23,6 +23,15 @@ export const AddQuestion = () => {
     e.preventDefault();
     console.log(completeQuestion);
     dispatch(postQuestion(completeQuestion));
+    setCompleteQuestion({
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      correct_ans: "",
+      exam: examId,
+    });
   };
 
   return (

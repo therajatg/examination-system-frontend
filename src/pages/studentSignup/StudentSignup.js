@@ -1,5 +1,5 @@
 import style from "./studentSignup.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { studentSignup } from "../../features/index";
@@ -15,14 +15,19 @@ export function StudentSignup() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { studentDetail } = useSelector((store) => store.studentAuth);
+  const location = useLocation();
+  const { studentDetail, error } = useSelector((store) => store?.studentAuth);
 
   const signupHandler = (e) => {
     e.preventDefault();
-    dispatch(studentSignup(userDetail));
-    if (studentDetail) {
-      navigate("/studentPortalHome");
-    }
+    dispatch(studentSignup(userDetail)).then((res) => {
+      if (res.error) {
+        // toast.error("Enter the correct credentials");
+      } else {
+        let from = location.state?.from?.pathname || "/studentPortalHome";
+        navigate(from, { replace: true });
+      }
+    });
   };
 
   return (

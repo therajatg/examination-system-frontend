@@ -10,23 +10,70 @@ import {
   ExamPaper,
   AddQuestion,
 } from "./pages/index";
+import { StudentRequiresAuth, StaffRequiresAuth } from "./requiresAuth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 export const App = () => {
   return (
     <main className="App">
+      <ToastContainer autoClose={1250} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studentLogin" element={<StudentLogin />} />
         <Route path="/staffLogin" element={<StaffLogin />} />
         <Route path="/studentSignup" element={<StudentSignup />} />
         <Route path="/staffSignup" element={<StaffSignup />} />
-        <Route path="/studentPortalHome" element={<StudentPortalHome />} />
-        <Route path="/staffPortalHome" element={<StaffPortalHome />} />
-        <Route path="/examPaper/:examId" element={<ExamPaper />} />
-        <Route path="/viewPaper/:examId" element={<ExamPaper />} />
-        <Route path="/deleteQuestions/:examId" element={<ExamPaper />} />
-        <Route path="/addQuestion/:examId" element={<AddQuestion />} />
+
+        <Route
+          path="/studentPortalHome"
+          element={
+            <StudentRequiresAuth>
+              <StudentPortalHome />
+            </StudentRequiresAuth>
+          }
+        />
+        <Route
+          path="/staffPortalHome"
+          element={
+            <StaffRequiresAuth>
+              <StaffPortalHome />
+            </StaffRequiresAuth>
+          }
+        />
+        <Route
+          path="/examPaper/:examId"
+          element={
+            <StudentRequiresAuth>
+              <ExamPaper />
+            </StudentRequiresAuth>
+          }
+        />
+        <Route
+          path="/viewPaper/:examId"
+          element={
+            <StaffRequiresAuth>
+              <ExamPaper />
+            </StaffRequiresAuth>
+          }
+        />
+        <Route
+          path="/deleteQuestions/:examId"
+          element={
+            <StaffRequiresAuth>
+              <ExamPaper />
+            </StaffRequiresAuth>
+          }
+        />
+        <Route
+          path="/addQuestion/:examId"
+          element={
+            <StaffRequiresAuth>
+              <AddQuestion />
+            </StaffRequiresAuth>
+          }
+        />
       </Routes>
     </main>
   );

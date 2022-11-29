@@ -4,7 +4,7 @@ import axios from "axios";
 
 const initialState = {
   status: "idle",
-  staffDetail: null,
+  staffDetail: localStorage.getItem("staffDetail"),
   error: null,
 };
 

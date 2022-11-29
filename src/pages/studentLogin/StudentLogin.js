@@ -1,5 +1,5 @@
 import style from "./studentLogin.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { studentLogin } from "../../features/index";
@@ -7,16 +7,21 @@ import { toast } from "react-toastify";
 
 export function StudentLogin() {
   const [userDetail, setUserDetail] = useState({ email: null, password: null });
-  const { studentDetail } = useSelector((store) => store.studentAuth);
+  const { studentDetail, error } = useSelector((store) => store.studentAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const loginHandler = (e) => {
     e.preventDefault();
-    dispatch(studentLogin(userDetail));
-    if (studentDetail) {
-      navigate("/studentPortalHome");
-    }
+    dispatch(studentLogin(userDetail)).then((res) => {
+      if (res.error) {
+        // toast.error("Enter the correct credentials");
+      } else {
+        let from = location.state?.from?.pathname || "/studentPortalHome";
+        navigate(from, { replace: true });
+      }
+    });
   };
 
   return (

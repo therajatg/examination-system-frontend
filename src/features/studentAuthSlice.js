@@ -4,7 +4,7 @@ import axios from "axios";
 
 const initialState = {
   status: "idle",
-  studentDetail: null,
+  studentDetail: JSON.parse(localStorage.getItem("studentDetail")),
   error: null,
 };
 

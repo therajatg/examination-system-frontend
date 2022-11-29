@@ -9,7 +9,8 @@ import axios from "axios";
 export function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { studentDetail } = useSelector((store) => store.studentAuth);
+  const { studentDetail } = useSelector((store) => store?.studentAuth);
+  const { staffDetail } = useSelector((store) => store?.staffAuth);
   const [name, setName] = useState("");
 
   const logoutHandler = () => {
@@ -22,14 +23,15 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    const obj1 = JSON.parse(localStorage.getItem("studentDetail"));
-    const obj2 = JSON.parse(localStorage.getItem("staffDetail"));
+    const obj1 =
+      studentDetail ?? JSON.parse(localStorage.getItem("studentDetail"));
+    const obj2 = staffDetail ?? JSON.parse(localStorage.getItem("staffDetail"));
     if (obj1) {
       setName(obj1?.name);
     } else {
       setName(obj2?.name);
     }
-  }, []);
+  }, [studentDetail]);
 
   return (
     <nav className={style.navContainer}>

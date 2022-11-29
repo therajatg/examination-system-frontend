@@ -28,7 +28,7 @@ export const ExamPaper = () => {
     let length = examPaper.length;
     for (let i = 0; i < length; i++) {
       if (examPaper[i].correct_ans === selected[i]) {
-        score++;
+        score = score + 10;
       }
     }
 

@@ -1,5 +1,5 @@
 import style from "./staffSignup.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { staffSignup } from "../../features/index";
@@ -14,13 +14,18 @@ export function StaffSignup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { staffDetail } = useSelector((store) => store.staffAuth);
+  const location = useLocation();
 
   const signupHandler = (e) => {
     e.preventDefault();
-    dispatch(staffSignup(userDetail));
-    if (staffDetail) {
-      navigate("/staffPortalHome");
-    }
+    dispatch(staffSignup(userDetail)).then((res) => {
+      if (res.error) {
+        // toast.error("Enter the correct credentials");
+      } else {
+        let from = location.state?.from?.pathname || "/stafPortalHome";
+        navigate(from, { replace: true });
+      }
+    });
   };
 
   return (
