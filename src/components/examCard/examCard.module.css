@@ -10,6 +10,31 @@
   border-radius: 0.5rem;
   transition-property: all;
   transition-duration: 1s;
+  font-size: 1.1rem;
+}
+
+.actionButtons {
+  display: none;
+}
+
+.actionButtons button {
+  background: transparent;
+  border: none;
+  color: var(--card-text-color);
+}
+
+.actionButtons button:hover {
+  background: var(--card-button-background-hover-color);
+  border: none;
+  border-radius: 1rem;
+}
+
+.card:hover .actionButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
 }
 
 .card:hover {
@@ -21,6 +46,6 @@
   display: none;
 }
 
-.card:hover .examAlreadyTaken {
+.card:hover .examAlreadyTaken .actionButtons {
   display: block;
 }

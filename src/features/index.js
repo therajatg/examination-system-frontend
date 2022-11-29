@@ -17,4 +17,6 @@ export {
   getAllExamsWithScores,
   getQuestions,
   postScore,
+  addNewExam,
+  deleteQuestion,
 } from "./examSlice";

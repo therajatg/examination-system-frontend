@@ -7,13 +7,16 @@ import { toast } from "react-toastify";
 
 export function StaffLogin() {
   const [userDetail, setUserDetail] = useState({ email: null, password: null });
+  const { staffDetail } = useSelector((store) => store.staffAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((store) => store?.auth?.token);
 
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(staffLogin(userDetail));
+    if (staffDetail) {
+      navigate("/staffPortalHome");
+    }
   };
 
   return (

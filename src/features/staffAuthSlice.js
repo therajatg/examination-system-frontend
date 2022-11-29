@@ -40,6 +40,7 @@ const staffAuthSlice = createSlice({
       state.status = "idle";
       state.staffDetail = null;
       state.error = null;
+      localStorage.removeItem("staffDetail");
     },
   },
   extraReducers: {
@@ -49,6 +50,7 @@ const staffAuthSlice = createSlice({
     [staffSignup.fulfilled]: (state, action) => {
       state.status = "success";
       state.staffDetail = action.payload;
+      localStorage.setItem("staffDetail", JSON.stringify(action.payload));
       toast.success("Signup Successful");
     },
     [staffSignup.rejected]: (state, action) => {
@@ -62,7 +64,7 @@ const staffAuthSlice = createSlice({
     [staffLogin.fulfilled]: (state, action) => {
       state.status = "success";
       state.staffDetail = action.payload;
-      console.log(action.payload);
+      localStorage.setItem("staffDetail", JSON.stringify(action.payload));
       toast.success("Welcome To staff Portal");
     },
     [staffLogin.rejected]: (state, action) => {

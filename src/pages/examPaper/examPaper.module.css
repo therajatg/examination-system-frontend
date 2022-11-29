@@ -17,6 +17,13 @@
   column-gap: 1.5rem;
 }
 
+.deleteBtn {
+  background-color: var(--delete-btn-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+}
+
 .submitBtn {
   background-color: var(--button-dark-color);
   color: var(--text-color);

@@ -28,10 +28,3 @@ export const StudentPortalHome = () => {
     </div>
   );
 };
-
-// (async () => {
-//   const examResponse = await axios.get("exam/");
-//   console.log(examResponse);
-//   const scoreResponse = await axios.get("score/");
-//   console.log(scoreResponse);
-// })();

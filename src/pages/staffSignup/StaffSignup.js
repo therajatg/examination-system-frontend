@@ -13,11 +13,14 @@ export function StaffSignup() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((store) => store?.auth?.token);
+  const { staffDetail } = useSelector((store) => store.staffAuth);
 
   const signupHandler = (e) => {
     e.preventDefault();
     dispatch(staffSignup(userDetail));
+    if (staffDetail) {
+      navigate("/staffPortalHome");
+    }
   };
 
   return (

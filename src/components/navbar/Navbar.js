@@ -12,25 +12,8 @@ export function Navbar() {
   const { studentDetail } = useSelector((store) => store.studentAuth);
   const [name, setName] = useState("");
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       const res1 = await axios.get("/api/categories");
-  //       setCategories(res1.data.categories);
-  //     })();
-  //   }, []);
-
-  //   const loginHandler = () => {
-  //     navigate("/login");
-  //   };
-
-  //   const logoutHandler = () => {
-  //     authDispatch({ type: "TOKEN", payload: null });
-  //     localStorage.removeItem("token");
-  //     toast.success("Logout Successful");
-  //   };
-
   const logoutHandler = () => {
-    if (studentDetail?.name) {
+    if (localStorage.getItem("studentDetail")) {
       dispatch(studentLogout());
     } else {
       dispatch(staffLogout());
@@ -39,8 +22,13 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    const obj = JSON.parse(localStorage.getItem("studentDetail"));
-    setName(obj?.name);
+    const obj1 = JSON.parse(localStorage.getItem("studentDetail"));
+    const obj2 = JSON.parse(localStorage.getItem("staffDetail"));
+    if (obj1) {
+      setName(obj1?.name);
+    } else {
+      setName(obj2?.name);
+    }
   }, []);
 
   return (

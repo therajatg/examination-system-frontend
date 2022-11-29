@@ -45,6 +45,7 @@ const studentAuthSlice = createSlice({
       state.status = "idle";
       state.studentDetail = null;
       state.error = null;
+      localStorage.removeItem("studentDetail");
     },
   },
   extraReducers: {

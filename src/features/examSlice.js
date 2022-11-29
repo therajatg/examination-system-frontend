@@ -54,12 +54,20 @@ const getQuestions = createAsyncThunk(
   async ({ examId }) => {
     try {
       const response = await axios.get("question/");
-      // console.log(response.data);
-      // console.log(response.data.filter((question) => question.exam == examId));
-      // console.log(examId);
       return response.data.filter((question) => question.exam == examId);
     } catch (err) {
       return err;
+    }
+  }
+);
+
+const deleteQuestion = createAsyncThunk(
+  "exam/deleteQuestion",
+  async ({ questionId }) => {
+    try {
+      await axios.delete(`question/${questionId}/`);
+    } catch (err) {
+      console.log(err);
     }
   }
 );
@@ -68,9 +76,17 @@ const postScore = createAsyncThunk("exam/postScore", async (scoreDetail) => {
   try {
     console.log(scoreDetail);
     const response = await axios.post("score/", scoreDetail);
-    // return response.data;
   } catch (err) {
     console.log(scoreDetail);
+  }
+});
+
+const addNewExam = createAsyncThunk("exam/addNewExam", async (examName) => {
+  try {
+    const response = await axios.post("exam/", examName);
+    // return response.data;
+  } catch (err) {
+    console.log(err);
     // return err;
   }
 });
@@ -122,4 +138,10 @@ const examSlice = createSlice({
 export const examReducer = examSlice.reducer;
 // export const { staffLogout } = staffAuthSlice.actions;
 
-export { getAllExamsWithScores, getQuestions, postScore };
+export {
+  getAllExamsWithScores,
+  getQuestions,
+  postScore,
+  addNewExam,
+  deleteQuestion,
+};

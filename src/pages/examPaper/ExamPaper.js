@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestions, postScore } from "../../features/index";
+import { getQuestions, postScore, deleteQuestion } from "../../features/index";
 import { Navbar } from "../../components/index";
 import style from "./examPaper.module.css";
 
@@ -11,6 +11,7 @@ export const ExamPaper = () => {
   const { examPaper } = useSelector((store) => store.exam);
   const [selected, setSelected] = useState({});
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(getQuestions({ examId: examId }));
@@ -30,6 +31,7 @@ export const ExamPaper = () => {
         score++;
       }
     }
+
     dispatch(
       postScore({
         score: score,
@@ -37,6 +39,11 @@ export const ExamPaper = () => {
         student: JSON.parse(localStorage.getItem("studentDetail")).student_id,
       })
     );
+    navigate("/studentPortalHome");
+  };
+
+  const deleteQuestionHandler = (questionId) => {
+    dispatch(deleteQuestion({ questionId: questionId }));
   };
 
   return (
@@ -100,23 +107,32 @@ export const ExamPaper = () => {
                 />
                 <label htmlFor={option4}>{option4}</label>
               </div>
+              {pathname.split("/")[1] === "deleteQuestions" && (
+                <p
+                  className={style.deleteBtn}
+                  onClick={() => deleteQuestionHandler(question_id)}
+                >
+                  Delete the above Question
+                </p>
+              )}
             </div>
           )
         )}
       </div>
 
-      {examPaper.length === 0 ? (
-        <button
-          onClick={() => navigate("/studentPortalHome")}
-          className={style.submitBtn}
-        >
-          Go Back
-        </button>
-      ) : (
-        <button className={style.submitBtn} onClick={calculateAndPostScore}>
-          Submit
-        </button>
-      )}
+      {pathname.split("/")[1] !== "viewPaper" &&
+        (examPaper.length === 0 ? (
+          <button
+            onClick={() => navigate("/studentPortalHome")}
+            className={style.submitBtn}
+          >
+            Go Back
+          </button>
+        ) : (
+          <button className={style.submitBtn} onClick={calculateAndPostScore}>
+            Submit
+          </button>
+        ))}
     </div>
   );
 };

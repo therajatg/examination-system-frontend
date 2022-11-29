@@ -10,7 +10,6 @@ export function StudentLogin() {
   const { studentDetail } = useSelector((store) => store.studentAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((store) => store?.auth?.token);
 
   const loginHandler = (e) => {
     e.preventDefault();
