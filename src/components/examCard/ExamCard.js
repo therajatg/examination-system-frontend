@@ -24,7 +24,9 @@ export const ExamCard = ({ examId, examName, examScore }) => {
           <button onClick={() => navigate(`/viewPaper/${examId}`)}>
             See All Questions
           </button>
-          <button>Add New Questions</button>
+          <button onClick={() => navigate(`/addQuestion/${examId}`)}>
+            Add New Questions
+          </button>
           <button onClick={() => navigate(`/deleteQuestions/${examId}`)}>
             Delete Questions
           </button>

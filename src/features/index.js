@@ -19,4 +19,5 @@ export {
   postScore,
   addNewExam,
   deleteQuestion,
+  postQuestion,
 } from "./examSlice";

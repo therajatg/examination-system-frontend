@@ -8,6 +8,7 @@ import {
   StudentPortalHome,
   StaffPortalHome,
   ExamPaper,
+  AddQuestion,
 } from "./pages/index";
 import "./App.css";
 
@@ -25,6 +26,7 @@ export const App = () => {
         <Route path="/examPaper/:examId" element={<ExamPaper />} />
         <Route path="/viewPaper/:examId" element={<ExamPaper />} />
         <Route path="/deleteQuestions/:examId" element={<ExamPaper />} />
+        <Route path="/addQuestion/:examId" element={<AddQuestion />} />
       </Routes>
     </main>
   );

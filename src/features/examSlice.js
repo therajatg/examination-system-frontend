@@ -61,6 +61,18 @@ const getQuestions = createAsyncThunk(
   }
 );
 
+const postQuestion = createAsyncThunk(
+  "exam/postQuestion",
+  async (questionDetail) => {
+    console.log(questionDetail);
+    try {
+      await axios.post("question/", questionDetail);
+    } catch (err) {
+      console.loga(err);
+    }
+  }
+);
+
 const deleteQuestion = createAsyncThunk(
   "exam/deleteQuestion",
   async ({ questionId }) => {
@@ -144,4 +156,5 @@ export {
   postScore,
   addNewExam,
   deleteQuestion,
+  postQuestion,
 };
