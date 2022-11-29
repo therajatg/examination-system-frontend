@@ -46,6 +46,7 @@ const studentAuthSlice = createSlice({
       state.studentDetail = null;
       state.error = null;
       localStorage.removeItem("studentDetail");
+      toast.success("Successfully Logged Out");
     },
   },
   extraReducers: {

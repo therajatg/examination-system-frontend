@@ -3,8 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { studentLogout, staffLogout } from "../../features/index";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import axios from "axios";
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -37,6 +35,7 @@ export function Navbar() {
     <nav className={style.navContainer}>
       <p>Online Examinaton Portal</p>
       <div className={style.right}>
+        {/* <p className="">Student Status</p> */}
         <p>Welcome {name}</p>
         <p onClick={logoutHandler} className={style.logoutBtn}>
           Logout

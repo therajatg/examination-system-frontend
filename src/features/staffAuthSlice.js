@@ -41,6 +41,7 @@ const staffAuthSlice = createSlice({
       state.staffDetail = null;
       state.error = null;
       localStorage.removeItem("staffDetail");
+      toast.success("Successfully Logged Out");
     },
   },
   extraReducers: {
